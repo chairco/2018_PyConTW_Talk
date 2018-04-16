@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+Django = "*"
+channels = "*"
+"psycopg2" = "*"
+django-debug-toolbar = "*"
+django-environ = "*"
+python-dotenv = "*"
+six = "*"
+django-crispy-forms = "*"
+celery = "*"
+django_compressor = "*"
+dj-database-url = "*"
+django = "*"
+"psycopg2-binary" = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"

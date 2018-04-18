@@ -102,6 +102,7 @@ DJANGO_APPS = (
 
 
 THIRD_PARTY_APPS = (
+    'channels',
     'crispy_forms',
 )
 
@@ -229,4 +230,16 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'djangoq-localmem',
     }
+}
+
+
+# Channels settings
+ASGI_APPLICATION = 'pycontw2018.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
 }

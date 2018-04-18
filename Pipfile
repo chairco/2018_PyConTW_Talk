@@ -17,6 +17,8 @@ django_compressor = "*"
 dj-database-url = "*"
 django = "*"
 "psycopg2-binary" = "*"
+channels-redis = "*"
+selenium = "*"
 
 [dev-packages]
 

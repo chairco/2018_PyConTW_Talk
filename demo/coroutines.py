@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
-# ref:
+# chairco(Jason)
+# 
+# Reference from A. Jesse Jiryu Davis's coroutin in Python 3.x tutorial
 #   https://emptysqua.re/blog/links-for-how-python-coroutines-work/
 #   https://github.com/ajdavis/coroutines-demo
 #
-# async 起手式
+# asynchrous I/O
 #   - non-blocking sockets
 #   - callbacks
 #   - event loop
+#   - efficiency (single-threaded concurrency)
+#   - callback are ewww
 #
 # coroutines
 #   - Feature
@@ -99,7 +103,7 @@ def get_eventloop(path):
     except BlockingIOError:
         pass
 
-    callback = lambda: connected_event(s, path)
+    callback = lambda: connected_event(s, path) # closure
     # non-blocking sockets
     selector.register(s.fileno(), EVENT_WRITE, data=callback)
 
@@ -226,47 +230,64 @@ def get(path):
             return
 
 
-# sync
-start = time.time()
-get('/foo')
-get('/bar')
-print('sync took %.1f sec' % (time.time() - start))
+class GET:
+    def __init__(self):
+        self.start = time.time()
+        global n_jobs
+        global c_n_jobs
 
-# async --nonblocking
-start = time.time()
-get_non_blocking('/foo')
-get_non_blocking('/bar')
-print('non-blocking took %.1f sec' % (time.time() - start))
+    @property
+    def sync(self):
+        '''sync
+        '''
+        get('/foo')
+        get('/bar')
+        return('sync took %.1f sec' % (time.time() - self.start))
 
-# async --callback
-start = time.time()
-get_callback('/foo')
-get_callback('/bar')
-print('callback took %.1f sec' % (time.time() - start))
+    @property
+    def nonblocking(self):
+        get_non_blocking('/foo')
+        get_non_blocking('/bar')
+        return('non-blocking took %.1f sec' % (time.time() - self.start))
+
+    @property
+    def callback(self):
+        get_callback('/foo')
+        get_callback('/bar')
+        return('callback took %.1f sec' % (time.time() - self.start))
+
+    @property
+    def eventloop(self):
+        get_eventloop('/foo')
+        get_eventloop('/bar')
+
+        while n_jobs:
+            print('%d, took %.1f sec' % (n_jobs, time.time() - self.start))
+            events = selector.select()
+            # what next?
+            for key, mask in events:
+                cb = key.data
+                cb()
+        
+        return('event_loop took %.1f sec' % (time.time() - self.start))
+
+    @property
+    def coro(self):
+        Task(get_coroutines('/foo'))
+        Task(get_coroutines('/bar'))
+        while c_n_jobs:
+            events = selector.select()
+            # what next?
+            for key, mask in events:
+                fut = key.data
+                fut.resolve()
+        return('coroutines took %.1f sec' % (time.time() - self.start))
 
 
-# async --eventloop
-start = time.time()
-get_eventloop('/foo')
-get_eventloop('/bar')
-
-while n_jobs:
-    events = selector.select()
-    # what next?
-    for key, mask in events:
-        cb = key.data
-        cb()
-print('event_loop took %.1f sec' % (time.time() - start))
-
-
-# async --coroutine
-start = time.time()
-Task(get_coroutines('/foo'))
-Task(get_coroutines('/bar'))
-while c_n_jobs:
-    events = selector.select()
-    # what next?
-    for key, mask in events:
-        fut = key.data
-        fut.resolve()
-print('coroutines took %.1f sec' % (time.time() - start))
+if __name__ == '__main__':
+    g = GET()
+    #print(g.sync)
+    #print(g.nonblocking)
+    #print(g.callback)
+    #print(g.eventloop)
+    #print(g.coro)

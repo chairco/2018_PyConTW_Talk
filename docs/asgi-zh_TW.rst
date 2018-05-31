@@ -12,8 +12,8 @@ servers (particularly web servers) and Python applications, intended
 to allow handling of multiple common protocol styles (including HTTP, HTTP/2,
 and WebSocket).
 
-本文檔提出了網路協議間的標準介面服務器（尤其是 web 服務器）和 Python 應用程式，意在允許處理
-多種常見協議樣式（包含 HTTP, HTTP/2, 和 WeBSocket）
+本文檔提出了網路協定間的標準介面服務器（尤其是 web 服務器）和 Python 應用程式，意在允許處理
+多種常見協定樣式（包含 HTTP, HTTP/2, 和 WeBSocket）
 
 
 This base specification is intended to fix in place the set of APIs by which
@@ -21,8 +21,8 @@ these servers interact and run application code;
 each supported protocol (such as HTTP) has a sub-specification that outlines
 how to encode and decode that protocol into messages.
 
-這個基本規劃旨在解決這些服務器交互並運行應用程序程式碼的 API 集合; 每個支持的協議（例如 HTTP）都
-有一個子規範，概述如何將該協議編碼和解碼成為訊息。
+這個基本規劃旨在解決這些服務器交互並運行應用程序程式碼的 API 集合; 每個支持的協定（例如 HTTP）都
+有一個子規範，概述如何將該協定編碼和解碼成為訊息。
 
 
 Rationale 依據
@@ -37,7 +37,7 @@ standard part of web programming that do not follow this pattern
 
 WSGI 規範從推出後運行的很順利，並且允許 Python 框架與 Web server 選擇有很大彈性。
 然和他的設計與 HTTP 風格請求/回應響應週期不可改變且緊密地結合在一起，同時有越來越多的
-協議逐漸成為開發 web 程式的標準，它們也逐漸不再遵循這種模式（最為人所知就是 WebSocket）。
+協定逐漸成為開發 web 程式的標準，它們也逐漸不再遵循這種模式（最為人所知就是 WebSocket）。
 
 
 ASGI attempts to preserve a simple application interface, but provide
@@ -53,8 +53,8 @@ asynchronous-friendly sets of messages and generalises it into two parts;
 a standardised interface for communication and to build servers around (this
 document), and a set of standard message formats for each protocol.
 
-它也採用將協議轉換成 Python-兼容，非同步-友好的訊息集合並將其概括為兩部分原則;一個用於通信
-的標準介面與圍繞建構伺服器（本文件），以及一組用於每個協議的標準訊息格式。
+它也採用將協定轉換成 Python-兼容，非同步-友好的訊息集合並將其概括為兩部分原則;一個用於通信
+的標準介面與圍繞建構伺服器（本文件），以及一組用於每個協定的標準訊息格式。
 
 
 Its primary goal is to provide a way to write HTTP/2 and WebSocket code,
@@ -81,13 +81,13 @@ ASGI 由兩個不同的兩個組件組成
 - A *protocol server*, which terminates sockets and translates them into
   connections and per-connection event messages.
 
-- 一個*協議服務器*，其用來終止 sockets 與轉換他們成為一個連接與每個連接的事件訊息。
+- 一個*協定服務器*，其用來終止 sockets 與轉換他們成為一個連接與每個連接的事件訊息。
 
 
 - An *application*, which lives inside a *protocol server*, is instantiated
   once per connection, and handles event messages as they happen.
 
-- 一個*應用程式*，它位於一個*協議服務器*內，每一個連接會實例化一次，並在事件訊息發生時處理。
+- 一個*應用程式*，它位於一個*協定服務器*內，每一個連接會實例化一次，並在事件訊息發生時處理。
 
 
 Like WSGI, the server hosts the application inside it, and dispatches incoming
@@ -109,7 +109,7 @@ Unlike WSGI, there are two separate parts to an ASGI connection:
 - A *connection scope*, which represents a protocol connection to a user and
   survives until the connection closes.
 
-- 一個*連接範圍*，其代表一個協議連接到一個使用者，且它會存活直到連接被關閉。
+- 一個*連接範圍*，其代表一個協定連接到一個使用者，且它會存活直到連接被關閉。
 
 
 - *Events*, which are sent to the application as things happen on the
@@ -132,7 +132,7 @@ specifications for those protocols are expected to define what the scope
 (instance) lifetime is and when it gets shut down.
 
 每個應用程式實例都映射到一個單一傳入的 "socket" 或連接，假如有清理操作，則預計將持續
-這個連接的生命週期再加上一點時間。一些協議也許不會使用傳統的 socket; ASGI 規範將針對這些協議去
+這個連接的生命週期再加上一點時間。一些協定也許不會使用傳統的 socket; ASGI 規範將針對這些協定去
 做預期，接著定義範圍（實例）的生命週期以及何時將它關閉。
 
 
@@ -171,7 +171,7 @@ front because they encapsulate something like a handshake. Each protocol
 definition must contain information about how long its connection scope lasts,
 and what information you will get inside it.
 
-有些協議可能會提供一個連接範圍，但只有非常有限的訊息，因為他們封裝了握手之類的東西。每個協議
+有些協定可能會提供一個連接範圍，但只有非常有限的訊息，因為他們封裝了握手之類的東西。每個協定
 定義都必須包含觀其連接範圍持續多長的訊息，與從中獲得哪些訊息。
 
 
@@ -181,7 +181,7 @@ event loop is entered, and depending on the protocol spec, may have to
 wait for an initial opening message.
 
 應用程式在被初始化與給定期連接範圍時**不能**與客戶端進行通訊; 他們必須等待到事件迴圈進入
-並且根據協議規範，可能必須等待最初開始的訊息。
+並且根據協定規範，可能必須等待最初開始的訊息。
 
 
 Events 事件
@@ -193,8 +193,9 @@ and ``http.disconnect``. For something like a WebSocket, it could be more like
 ``websocket.connect``, ``websocket.receive``, ``websocket.receive``,
 ``websocket.disconnect``.
 
-ASGI 將協議分解一系列應用程式必須回應的*事件*，這與按順序的兩個事件一樣簡單 - ``http.request``
-與 ``http.disconnect``。 針對像是一個 WebSocket，可能就會像是 ``websocket.connect``, ``websocket.receive``, ``websocket.receive``,
+ASGI 將協定分解一系列應用程式必須回應的*事件*，這與按順序的兩個事件一樣簡單 - ``http.request``
+與 ``http.disconnect``。 針對像是一個 WebSocket，可能就會像是 ``websocket.connect``, 
+``websocket.receive``, ``websocket.receive``,
 ``websocket.disconnect``。
 
 
@@ -241,14 +242,14 @@ ASGI 應用程式被定義成可調用的：
 * ``scope``: The Connection Scope, a dictionary that contains at least a
   ``type`` key specifying the protocol that is incoming.
 
-* ``範圍``：連接範圍，一個至少包含一個 ``type`` key 所指定傳入協議的字典。
+* ``範圍``：連接範圍，一個至少包含一個 ``type`` key 所指定傳入協定的字典。
 
 
 This first callable is called whenever a new connection comes in to the
 protocol server, and creates a new *instance* of the application per
 connection (the instance is the object that this first callable returns).
 
-每當一個新的連接進入協議服務器，這個第一個可調用的對像在有新連接時會被調用
+每當一個新的連接進入協定服務器，這個第一個可調用的對像在有新連接時會被調用
 並建立一個新的*實例*（這個實例是一個物件，第一次被調用時回傳）
 
 
@@ -310,23 +311,23 @@ defined by one of the application protocols. ``scope`` must be a ``dict``.
 The key ``scope["type"]`` will always be present, and can be used to work
 out which protocol is incoming.
 
-無論是 ``scope`` 或你發送和接受的應用持續協議中的一種訊息。``scope``必須是一個 ``dict``。
-key ``scope["type"]`` 始終存在，並可用於確定傳入哪個協議。
+無論是 ``scope`` 或你發送和接受的應用持續協定中的一種訊息。``scope``必須是一個 ``dict``。
+key ``scope["type"]`` 始終存在，並可用於確定傳入哪個協定。
 
 
 The protocol-specific sub-specifications cover these scope
 and message formats. They are equivalent to the specification for keys in the
 ``environ`` dict for WSGI.
 
-協議特定的子規範包含了這些範圍的訊息格式。它們相當於 ``environ`` WSGI 字典中 key 的規範。
+協定特定的子規範包含了這些範圍的訊息格式。它們相當於 ``environ`` WSGI 字典中 key 的規範。
 
 
-Protocol Specfications 協議規範
+Protocol Specfications 協定規範
 ----------------------
 
 These describe the standardized scope and message formats for various protocols.
 
-這邊描述各種協議的標準化範圍和訊息格式
+這邊描述各種協定的標準化範圍和訊息格式
 
 
 The one common key across all scopes and messages is ``type``, a way to indicate
@@ -339,7 +340,7 @@ In scopes, the ``type`` key must be a unicode string, like ``"http"`` or
 ``"websocket"``, as defined in the relevant protocol specification.
 
 在範圍中，``type`` key 必須是一個 unicode 字串，像是 ``"http"`` 或是 ``"websocket"``，
-如相關協議規範中的定義。
+如相關協定規範中的定義。
 
 
 In messages, the ``type`` should be namespaced as ``protocol.message_type``,
@@ -348,13 +349,13 @@ defined by the protocol spec. Examples of a message ``type`` value include
 ``http.request`` and ``websocket.send``.
 
 在訊息中，``type`` 應該是命名空間 ``protocol.message_type``，所述， ``protocol`` 
-匹配 scope type，並且 ``message_type`` 是個由協議規範的定義。訊息中 ``type`` 值的
+匹配 scope type，並且 ``message_type`` 是個由協定規範的定義。訊息中 ``type`` 值的
 例子包含 ``http.request`` 與 ``websocket.send``。
 
 
 Current protocol specifications:
 
-當前協議規範：
+當前協定規範：
 
 
 * `HTTP and WebSocket <https://github.com/django/asgiref/blob/master/specs/www.rst>`_
@@ -420,7 +421,7 @@ In both cases, presence of additional keys in the event dict should not raise
 an exception. This is to allow non-breaking upgrades to protocol specifications
 over time.
 
-在這兩種情況下，事件字典中的其他鍵的存在都不應引發異常。這是為了允許隨著時間的推移對協議規範
+在這兩種情況下，事件字典中的其他鍵的存在都不應引發異常。這是為了允許隨著時間的推移對協定規範
 進行不間斷的升級。
 
 Servers are free to surface errors that bubble up out of application instances
@@ -440,7 +441,7 @@ There are times when protocol servers may want to provide server-specific
 extensions outside of a core ASGI protocol specification, or when a change
 to a specification is being trialled before being rolled in.
 
-有時候協議服務器可能希望在核心 ASGI 協議規範之外提供特定於服務器的擴展，或者在規範的更改被推入
+有時候協定服務器可能希望在核心 ASGI 協定規範之外提供特定於服務器的擴展，或者在規範的更改被推入
 之前進行試運行。
 
 
@@ -449,7 +450,7 @@ additions to a protocol specification that are optional but that, if provided
 by the server and understood by the application, can be used to get more
 functionality.
 
-對於這個用例，我們定義了一個通用模式 ``extensions`` - 對協議規範的名稱添加是可選的，
+對於這個用例，我們定義了一個通用模式 ``extensions`` - 對協定規範的名稱添加是可選的，
 但如果由服務器提供並由應用程序理解，則可用於獲取更多功能。
 
 
@@ -476,7 +477,7 @@ that allows a new event to be sent back to the server that tries to flush the
 network send buffer all the way through the OS level. It provides an empty
 entry in the extensions dict to signal that it can handle the event::
 
-例如，假設 HTTP 協議服務器希望提供一個擴展，允許將新事件發送回嘗試刷新網絡發送緩衝區的服務器，
+例如，假設 HTTP 協定服務器希望提供一個擴展，允許將新事件發送回嘗試刷新網絡發送緩衝區的服務器，
 直到整個操作系統級別。它在擴展詞典中提供一個空的條目來表明它可以處理該事件::
 
     scope = {

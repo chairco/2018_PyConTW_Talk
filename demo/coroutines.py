@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # chairco(Jason)
-# 
+#
 # Reference from A. Jesse Jiryu Davis's coroutin in Python 3.x tutorial
 #   https://emptysqua.re/blog/links-for-how-python-coroutines-work/
 #   https://github.com/ajdavis/coroutines-demo
@@ -16,6 +16,10 @@
 #   - Feature
 #   - generator
 #   - Task
+#
+# Note
+#   please execute server.py to run a flask web server before run sample code
+
 
 from selectors import DefaultSelector, EVENT_WRITE, EVENT_READ
 import socket
@@ -103,7 +107,7 @@ def get_eventloop(path):
     except BlockingIOError:
         pass
 
-    callback = lambda: connected_event(s, path) # closure
+    callback = lambda: connected_event(s, path)  # closure
     # non-blocking sockets
     selector.register(s.fileno(), EVENT_WRITE, data=callback)
 
@@ -231,6 +235,7 @@ def get(path):
 
 
 class GET:
+
     def __init__(self):
         self.start = time.time()
         global n_jobs
@@ -268,7 +273,7 @@ class GET:
             for key, mask in events:
                 cb = key.data
                 cb()
-        
+
         return('event_loop took %.1f sec' % (time.time() - self.start))
 
     @property
@@ -286,8 +291,8 @@ class GET:
 
 if __name__ == '__main__':
     g = GET()
-    #print(g.sync)
-    #print(g.nonblocking)
-    #print(g.callback)
-    #print(g.eventloop)
-    #print(g.coro)
+    print(g.sync)
+    print(g.nonblocking)
+    print(g.callback)
+    print(g.eventloop)
+    print(g.coro)

@@ -1,3 +1,14 @@
+{# chats/templates/index.html #}
+{% extends 'chats/_base.html' %}
+
+
+{% block content %}
+  <ul class="breadcrumb">
+    {% block bar %}{{ block.super }}
+    <li class="active"></li>
+    {% endblock bar %}
+  </ul>
+
 <!-- chats/templates/chats/index.html -->
 <!DOCCTYPE html>
 <html>
@@ -7,21 +18,31 @@
 </head>
 <body>
     What chat room would you like to enter?<br/>
-    <input id="room-name-input" type="text" size="100"/><br/>
-    <input id="room-name-submit" type="button" value="Enter"/>
+    <div class="form-group">
+      <input id="room-name-input" class="form-control" type="text" size="100"/>
+    </div>
+    <input id="room-name-submit" type="button" class="btn btn-primary" value="Enter"/>
 </body>
-<script>
-    document.querySelector('#room-name-input').focus();
-    document.querySelector('#room-name-input').onkeyup = function(e) {
-        if (e.keyCode === 13) {  // enter, return
-            document.querySelector('#room-name-submit').click();
-        }
-    };
-
-    document.querySelector('#room-name-submit').onclick = function(e) {
-        var roomName = document.querySelector('#room-name-input').value;
-        window.location.pathname = '/chats/' + roomName + '/';
-    };
-</script>
 </html>
+{% endblock content %}
 
+{% block js %}
+<script>
+document.querySelector('#room-name-input').focus();
+document.querySelector('#room-name-input').onkeyup = function(e) {
+    if (e.keyCode === 13) {  // enter, return
+        document.querySelector('#room-name-submit').click();
+    }
+};
+
+document.querySelector('#room-name-submit').onclick = function(e) {
+    var roomName = document.querySelector('#room-name-input').value;
+    window.location.pathname = '/chats/' + roomName + '/';
+};
+
+document.querySelector('#syncroom-name-submit').onclick = function(e) {
+    var roomName = document.querySelector('#room-name-input').value;
+    window.location.pathname = '/chats/sync/' + roomName + '/';
+};
+</script>
+{% endblock js %}

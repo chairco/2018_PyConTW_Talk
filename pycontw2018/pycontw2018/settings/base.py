@@ -214,7 +214,7 @@ LOGIN_URL = reverse_lazy('login')
 
 LOGOUT_URL = reverse_lazy('logout')
 
-LOGIN_REDIRECT_URL = reverse_lazy('home')
+LOGIN_REDIRECT_URL = reverse_lazy('index')
 
 
 # Third-party app and custom settings.

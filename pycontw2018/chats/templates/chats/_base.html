@@ -1,0 +1,21 @@
+{# chats/_base.html #}
+{% extends 'base.html' %}
+
+{% block body %}
+{{ block.super }}
+<div class="container">
+  <div class="row">
+    <div class="col-xs-1 col-sm-1"></div>
+      <div class="col-xs-16 col-sm-10 main">
+        {% block content %}
+            {% block bar %}
+              <li><a href="{% url 'index' %}">Chats 首頁</a>
+                <span class="divider">/</span>
+              </li>
+          {% endblock bar %}
+        {% endblock content %}
+      </div>
+    <div class="col-xs-1 col-sm-1"></div>
+  </div>
+</div>
+{% endblock body %}

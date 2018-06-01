@@ -14,3 +14,9 @@ def room(request, room_name):
     return render(request, 'chats/room.html', {
         'room_name_json': mark_safe(json.dumps(room_name))
     })
+
+
+def syncroom(request, room_name):
+    return render(request, 'chats/sync_room.html', {
+        'room_name_json': mark_safe(json.dumps(room_name))
+    })

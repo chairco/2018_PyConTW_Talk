@@ -13,7 +13,7 @@
 #   - callback are ewww
 #
 # coroutines
-#   - Feature
+#   - Future
 #   - generator
 #   - Task
 #
@@ -243,8 +243,6 @@ class GET:
 
     @property
     def sync(self):
-        '''sync
-        '''
         get('/foo')
         get('/bar')
         return('sync took %.1f sec' % (time.time() - self.start))
@@ -291,8 +289,9 @@ class GET:
 
 if __name__ == '__main__':
     g = GET()
-    print(g.sync)
-    print(g.nonblocking)
-    print(g.callback)
-    print(g.eventloop)
-    print(g.coro)
+    #print(g.sync)
+    #print(g.nonblocking)
+    #print(g.callback)
+    #print(g.eventloop)
+    #print(g.coro)
+    

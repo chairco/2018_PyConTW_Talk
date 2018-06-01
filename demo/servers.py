@@ -7,7 +7,7 @@ from flask import Flask, Response
 app = Flask(__name__)
 
 
-message = b'Hello PyTW2018! ' * 100 + b'\n'
+message = b'Hello PyConTW2018! ' * 100 + b'\n'
 CHUNK_LEN = 100
 N_CHUNKS = len(message) / CHUNK_LEN
 

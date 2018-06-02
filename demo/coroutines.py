@@ -289,9 +289,9 @@ class GET:
 
 if __name__ == '__main__':
     g = GET()
-    #print(g.sync)
+    print(g.sync)
     #print(g.nonblocking)
     #print(g.callback)
     #print(g.eventloop)
     #print(g.coro)
-    
+

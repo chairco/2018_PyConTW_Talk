@@ -4,19 +4,13 @@ import concurrent.futures
 
 from asgiref.sync import sync_to_async, async_to_sync
 
-
+# async to sync
 async def async_get_chat_id(name):
     start = time.time()
     print('hello async, %.1f sec' % (time.time() - start))
     await asyncio.sleep(3)
     print('hello async, %.1f sec' % (time.time() - start))
     return "chat-%s" % name
-
-
-async def async_main():
-    id_coroutine = async_get_chat_id("django")
-    result = await id_coroutine
-    print(result)
 
 
 def get_chat_id(name):
@@ -27,10 +21,17 @@ def get_chat_id(name):
     return "chat-%s" % name
 
 
+async def async_main():
+    id_coroutine = async_get_chat_id("django")
+    result = await id_coroutine
+    print(result)
+
+
 async def main():
     result = get_chat_id("django")
 
 
+# sync to async
 async def main_sync_to_async():
     result = await sync_to_async(get_chat_id)("django")
 

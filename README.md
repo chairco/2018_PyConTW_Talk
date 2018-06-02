@@ -1,5 +1,8 @@
 # 2018_PyConTW_Talk
 
+[投影片](https://speakerdeck.com/chairco/pycontw-2018-easy-way-to-build-a-real-time-and-asynchronous-web-or-app-with-django-channels)
+
+
 ## 環境設定
 
 建議採用 [Pipenv](https://github.com/kennethreitz/pipenv) 做套件管理，Pipenv 是一個出色的 Python 工具管理套件，類似其他程式語言裡常見的：bundler, composer, npm, cargo, yarn, 等

@@ -7,7 +7,9 @@
 
 建議採用 [Pipenv](https://github.com/kennethreitz/pipenv) 做套件管理，Pipenv 是一個出色的 Python 工具管理套件，類似其他程式語言裡常見的：bundler, composer, npm, cargo, yarn, 等
 
-如果對它還不熟悉，這裡有一篇簡單的 [Pipenv 使用教學](https://chairco.github.io/posts/2017/02/Pipenv%20tutorial.html)。
+如果對它還不熟悉，這裡有一篇簡單的 [Pipenv 使用教學](https://chairco.github.io/posts/2017/02/Pipenv%20tutorial.html)。或是參考官方 repo 上簡單[說明](https://github.com/pypa/pipenv)。Have a good day
+
+
 
 ### pipenv
 

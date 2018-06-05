@@ -56,13 +56,13 @@ cp 2018_PyConTW_Talk/pycontw2018/pycontw2018/settings/local_sample.env 2018_PyCo
 
 接著設定環境需要參數:
 
-+ `DATABASE_URL='postgres://localhost/pycontw2018'` 預設採用 postgresql 資料庫，可根據需求修改(sqlite3 目前測試會有問題)。
++ `DATABASE_URL='postgres://localhost/pycontw2018'` 預設採用 postgresql 資料庫，可根據需求修改成 sqlite3，請參考 local_sample.env。
 + `SECRET_KEY={}` Django 需要的 secret key。可到[這邊](https://www.miniwebtool.com/django-secret-key-generator/)取得
 
 
 建立資料庫:
 
-注意，目前資料庫預設 `Postgresql` 請先在本機端預設安裝，並且建立對應的 table。安裝完成後再執行 migrate 指令。
+注意，如果資料庫採用 `Postgresql` 請先在本機端預設安裝，並且建立對應的 table。安裝完成後再執行 migrate 指令。
 
 ```
 python manage.py migrate

@@ -35,12 +35,12 @@ async def sync_async_main():
     result = get_chat_id("django")
 
 
-##### using asgiref#####
+##### sync to aysnc using asgiref #####
 async def asgiref_sync_to_async_main():
     result = await sync_to_async(get_chat_id)("django")
 
 
-##### using thread #####
+##### sync to aysnc using thread #####
 async def thread_main():
     #executor = concurrent.futures.ThreadPoolExecutor(max_workers=3)
     loop = asyncio.get_event_loop()
@@ -50,8 +50,9 @@ async def thread_main():
     result = await loop.run_in_executor(None, get_chat_id, "django")
 
 
+
 ##### main async to async #####
-def call_async_async():
+def call_async_to_async():
     loop = asyncio.get_event_loop()
     tasks = [async_async_main(), async_async_main()]
     loop.run_until_complete(asyncio.wait(tasks))
@@ -92,11 +93,14 @@ def call_asgiref_async_to_sync():
     result = async_to_sync(async_get_chat_id)("django")
 
 
-# call_async_async()
+#Nothing to do, can use await syntax
+# call_async_to_async()
 
+#Threadpool to cross 2 world
 # call_sync_to_async()  # <-- has block
 # call_thread()
 # call_asgiref_sync_to_aync()
 
+#Eventloop to cross 2 world
 # call_createventloop_async_to_sync()
 # call_asgiref_async_to_sync()
